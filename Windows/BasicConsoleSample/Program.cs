@@ -64,7 +64,8 @@ namespace BasicConsoleSample
             // Set up Face API call.
             grabber.AnalysisFunction = async frame =>
             {
-                Console.WriteLine($"Submitting frame acquired at {frame.Metadata.Timestamp}");
+                Consolw.WriteLine("Submirring Frame");
+                //Console.WriteLine($"Submitting frame acquired at {frame.Metadata.Timestamp}");
                 // Encode image and submit to Face API. 
                 return (await faceClient.Face.DetectWithStreamAsync(frame.Image.ToMemoryStream(".jpg"))).ToArray();
             };
@@ -74,8 +75,10 @@ namespace BasicConsoleSample
             {
                 if (e.TimedOut)
                     Console.WriteLine("API call timed out.");
+                    //Error in making API calls
                 else if (e.Exception != null)
-                    Console.WriteLine("API call threw an exception.");
+                    //Non-timed out exceptions 
+                    Console.WriteLine("API call threw an exception.");                
                 else
                     Console.WriteLine($"New result received for frame acquired at {e.Frame.Metadata.Timestamp}. {e.Analysis.Length} faces detected");
             };
